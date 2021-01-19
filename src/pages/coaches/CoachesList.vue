@@ -6,7 +6,9 @@
     <base-card>
       <div class="controls">
         <base-button mode="outline">Refresh</base-button>
-        <base-button link to="/register">Register as coach</base-button>
+        <base-button v-if="!isCoach" link to="/register"
+          >Register as coach</base-button
+        >
       </div>
       <ul v-if="hasCoaches">
         <coach-item
@@ -54,6 +56,10 @@ export default {
         }
         return false;
       });
+    },
+
+    isCoach() {
+      return this.$store.getters['coaches/isCoach'];
     },
     hasCoaches() {
       return this.$store.getters['coaches/hasCoaches'];
